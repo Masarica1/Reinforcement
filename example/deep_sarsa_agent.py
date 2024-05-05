@@ -3,9 +3,8 @@ import random
 import numpy as np
 import matplotlib.pylab as pylab
 from example.environment import Env
-from keras.layers import Dense
-from keras.optimizers import Adam
-from keras.models import Sequential
+from keras import layers
+import keras
 
 EPISODES = 1000
 
@@ -19,28 +18,28 @@ class DeepSARSAgent:
         self.action_space = [0, 1, 2, 3, 4]
         # get size of state and action
         self.action_size = len(self.action_space)
-        self.state_size = 15
+        self.state_size = 2
         self.discount_factor = 0.99
         self.learning_rate = 0.001
 
         self.epsilon = 1.  # exploration
-        self.epsilon_decay = .9995
+        self.epsilon_decay = .9999
         self.epsilon_min = 0.01
         self.model = self.build_model()
 
         if self.load_model:
             self.epsilon = 0.05
-            self.model.load_weights("./save_model/deep_sarsa.weights.h5")
+            self.model.load_weights("./model/deep_sarsa.weights.h5")
 
     # approximate Q function using Neural Network
     # state is input and Q Value of each action is output of network
     def build_model(self):
-        model = Sequential()
-        model.add(Dense(30, input_dim=self.state_size, activation='relu'))
-        model.add(Dense(30, activation='relu'))
-        model.add(Dense(self.action_size, activation='linear'))
+        model = keras.models.Sequential()
+        model.add(layers.Dense(30, input_dim=self.state_size, activation='relu'))
+        model.add(layers.Dense(30, activation='relu'))
+        model.add(layers.Dense(self.action_size, activation='linear'))
         model.summary()
-        model.compile(loss='mse', optimizer=Adam(learning_rate=self.learning_rate))
+        model.compile(loss='mse', optimizer=keras.optimizers.Adam(learning_rate=self.learning_rate))
         return model
 
     # get action from model using epsilon-greedy policy

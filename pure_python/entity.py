@@ -1,6 +1,5 @@
 import random
 import math
-import numpy as np
 
 window_size = [1200, 900]
 

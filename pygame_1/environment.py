@@ -3,10 +3,10 @@ import pygame
 import random
 
 
-class Player(pygame.sprite.Sprite):
+class Player(pygame_1.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface((75, 75))
+        self.image = pygame_1.Surface((75, 75))
         self.rect = self.image.get_rect()
         self.vel = 10
 
@@ -31,10 +31,10 @@ class Player(pygame.sprite.Sprite):
             self.rect.left = 0
 
 
-class Enemy(pygame.sprite.Sprite):
+class Enemy(pygame_1.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface((75, 75))
+        self.image = pygame_1.Surface((75, 75))
         self.rect = self.image.get_rect()
         self.vel = 10
 
@@ -53,7 +53,7 @@ class Enemy(pygame.sprite.Sprite):
 # window setting
 window_w = 1280
 window_h = 900
-window = pygame.display.set_mode((window_w, window_h))
+window = pygame_1.display.set_mode((window_w, window_h))
 
 # entity setting
 player = Player()

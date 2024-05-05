@@ -1,7 +1,4 @@
 import copy
-
-import pygame
-
 from environment import *
 from agent import Agent
 
@@ -13,15 +10,15 @@ pre_action = agent.get_action(pre_state)
 reward = 0
 
 # time setting
-clock = pygame.time.Clock()
-event_1 = pygame.USEREVENT + 1
-pygame.time.set_timer(event_1, 250)
+clock = pygame_1.time.Clock()
+event_1 = pygame_1.USEREVENT + 1
+pygame_1.time.set_timer(event_1, 250)
 
 # loop
 running = True
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for event in pygame_1.event.get():
+        if event.type == pygame_1.QUIT:
             running = False
         if event.type == event_1:
             state = get_state()
@@ -42,7 +39,7 @@ while running:
     reward += get_reward()
 
     clock.tick(120)
-    pygame.display.update()
-pygame.quit()
+    pygame_1.display.update()
+pygame_1.quit()
 
 agent.model.save('./model/deep_sarsa_model.keras')
