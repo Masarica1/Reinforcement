@@ -12,13 +12,13 @@ EPISODES = 1000
 # this is DeepSARSA Agent for the GridWorld
 # Utilize Neural Network as q function approximate
 class DeepSARSAgent:
-    def __init__(self):
+    def __init__(self, state_size: int):
         self.load_model = True
         # actions which agent can do
         self.action_space = [0, 1, 2, 3, 4]
         # get size of state and action
         self.action_size = len(self.action_space)
-        self.state_size = 2
+        self.state_size = state_size
         self.discount_factor = 0.99
         self.learning_rate = 0.001
 
@@ -76,7 +76,7 @@ class DeepSARSAgent:
 
 if __name__ == "__main__":
     env = Env()
-    agent = DeepSARSAgent()
+    agent = DeepSARSAgent(15)
 
     global_step = 0
     scores, episodes = [], []

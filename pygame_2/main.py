@@ -12,7 +12,7 @@ event_1 = pygame.USEREVENT + 1
 pygame.time.set_timer(event_1, 250)
 
 # agent setting
-agent = DeepSARSAgent()
+agent = DeepSARSAgent(state_size)
 
 # setting
 EPISODES = 1000
@@ -25,7 +25,7 @@ for e in range(EPISODES):
     done = False
     score = 0
     state = reset()
-    state = np.reshape(state, [1, 2])
+    state = np.reshape(state, [1, state_size])
     reward = 0
     action = 0
 
@@ -36,7 +36,7 @@ for e in range(EPISODES):
             if event.type == event_1:
                 # action and train
                 next_state, reward, done = step()
-                next_state = np.reshape(next_state, [1, 2])
+                next_state = np.reshape(next_state, [1, state_size])
                 next_action = agent.get_action(next_state)
 
                 agent.train_model(state, action, reward, next_state, next_action, done)
@@ -55,7 +55,7 @@ for e in range(EPISODES):
             print("episode:", e, "  score:", score, "global_step",
                   global_step, "  epsilon:", agent.epsilon)
 
-    if e % 10 == 0:
+    if e % 50 == 0:
         agent.model.save_weights("./model/deep_sarsa.weights.h5")
         plt.show()
 

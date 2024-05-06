@@ -11,6 +11,8 @@ window = pygame.display.set_mode(window_setting)
 player = Player()
 target = Target()
 
+state_size = 2
+
 
 # update and draw
 def uad(action: int):

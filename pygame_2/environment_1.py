@@ -158,3 +158,5 @@ for _ in range(2):
     # noinspection PyTypeChecker
     enemy_group.add(Enemy())
 target = Target()
+
+state_size = 12
